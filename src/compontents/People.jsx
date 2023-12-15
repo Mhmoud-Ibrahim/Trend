@@ -1,0 +1,56 @@
+import Aos from 'aos'
+import 'aos/dist/aos.css'
+import { useEffect } from 'react'
+import useTrending from '../Hooks/useTrending'
+import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
+
+export default function People() {
+
+   
+  let {trending} = useTrending(`https://api.themoviedb.org/3/person/popular?api_key=f3315c4ac6766b68283c8d019253abdc&language=en-US&`)
+
+ 
+
+
+
+  useEffect(()=>{
+   
+    Aos.init({duration:1000})
+    
+    },[])
+
+   
+
+
+  return <>
+  <Helmet>
+    <title>
+      people
+    </title>
+  </Helmet>
+  <div className="container p-1">
+  <div className="row  py-5">
+  <div data-aos='zoom-in-up' className="col-md-3 card-title d-flex align-align-items-center">
+    <div className='text-start'>
+    <div className="brdr w-25 mb-3 "></div>
+      <h2 className='h4' >Trending <br />People <br />Right  </h2>
+      <p className='  text-light-emphasis'>Top Trending People By Week</p>
+      <div className="brdr w-100 mb-3 "></div>
+    </div>
+    </div>
+    {trending?.map((item , index)=> 
+    <div data-aos='fade-right'  key={index} className="col-md-2 text-center">
+    <Link className='text-decoration-none text-white' to={`/ItemsDetails/${item.id}/person`}>
+    <div className='position-relative' >
+      {item.poster_path?<img src={'https://image.tmdb.org/t/p/w500' + item.profile} className='w-100 ' alt="" />:<img src={'https://image.tmdb.org/t/p/w500' + item.poster_path} className='w-100 ' alt="" />}<img src={'https://image.tmdb.org/t/p/w500' + item.profile_path} className='w-100 ' alt="" />
+      <p className='text-light'></p>
+      <h4 className="h6 my-2">{item.name} {item.title} </h4>
+   
+    </div>
+</Link>
+  </div>   )}
+  </div>
+ </div>
+  </>
+}
