@@ -1,5 +1,5 @@
 
-import { createBrowserRouter,RouterProvider } from 'react-router-dom'
+import { createBrowserRouter,createHashRouter,RouterProvider } from 'react-router-dom'
 import './App.css'
 import Layout from './compontents/Layout'
 import Home from './compontents/Home'
@@ -18,7 +18,7 @@ import { Offline} from "react-detect-offline";
 function App() {
 
   
-const routers = createBrowserRouter([
+const routers = createHashRouter([
   {path:'',element:<Layout/>,children:[
     {index:true,element:<ProtectedRoute><Home/></ProtectedRoute> },
     {path:'home',element:<Home/>},
